@@ -33,9 +33,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <BookShelf name="To Read" books={this.state.wantToRead}></BookShelf>
-        <BookShelf name="Reading" books={this.state.currentlyReading}></BookShelf>
-        <BookShelf name="Read" books={this.state.read}></BookShelf>
+        <BookShelf name="To Read" type="wantToRead" books={this.state.wantToRead}></BookShelf>
+        <BookShelf name="Reading" type="currentlyReading" books={this.state.currentlyReading}></BookShelf>
+        <BookShelf name="Read" type="read" books={this.state.read}></BookShelf>
       </div>
     );
   }
