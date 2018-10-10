@@ -11,6 +11,10 @@ class App extends Component {
   }
 
   componentDidMount () {
+    this.loadAllBooks();
+  }
+
+  loadAllBooks () {
     const me = this;
 
     BooksAPI.getAll().then(function (books) {
@@ -30,12 +34,18 @@ class App extends Component {
     });
   }
 
+  onMoveBook = (book, shelf) => {
+    const me = this;
+
+    BooksAPI.update(book, shelf).then(()=> me.loadAllBooks());
+  }
+
   render() {
     return (
       <div className="App">
-        <BookShelf name="To Read" type="wantToRead" books={this.state.wantToRead}></BookShelf>
-        <BookShelf name="Reading" type="currentlyReading" books={this.state.currentlyReading}></BookShelf>
-        <BookShelf name="Read" type="read" books={this.state.read}></BookShelf>
+        <BookShelf name="To Read" type="wantToRead" books={this.state.wantToRead} onMoveBook={this.onMoveBook}></BookShelf>
+        <BookShelf name="Reading" type="currentlyReading" books={this.state.currentlyReading} onMoveBook={this.onMoveBook}></BookShelf>
+        <BookShelf name="Read" type="read" books={this.state.read} onMoveBook={this.onMoveBook}></BookShelf>
       </div>
     );
   }
