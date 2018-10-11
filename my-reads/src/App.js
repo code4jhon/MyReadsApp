@@ -56,7 +56,9 @@ class App extends Component {
           </div>
         )}/>
 
-        <Route path='/Search' component={SearchBooks} />
+        <Route path='/Search' render={()=> (
+          <SearchBooks onMoveBook={this.onMoveBook}></SearchBooks>
+        )}/>
       </div>
     );
   }

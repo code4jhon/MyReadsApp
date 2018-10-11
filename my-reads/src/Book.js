@@ -3,14 +3,15 @@ import PropTypes from 'prop-types'
 
 class Book extends Component {
   static propTypes = {
-    coverUrl: PropTypes.string.isRequired,
+    coverUrl: PropTypes.string,
     title: PropTypes.string.isRequired,
-    authors: PropTypes.array.isRequired,
+    authors: PropTypes.array,
     onMoveBook: PropTypes.func.isRequired
   }
 
   render() {
     const onMoveBook = this.props.onMoveBook;
+    const authors = this.props.authors || [];
 
     return (
       <div className="book">
@@ -27,7 +28,7 @@ class Book extends Component {
           </div>
         </div>
         <div className="book-title">{this.props.title}</div>
-        <div className="book-authors">{this.props.authors.join(', ')}</div>
+        <div className="book-authors">{authors}</div>
       </div>
     )
   }
