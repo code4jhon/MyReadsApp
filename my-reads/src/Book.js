@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 
-const Book =  function (props) {
-  const onMoveBook = props.onMoveBook;
-  const authors = props.authors || [];
+const Book =  function ({onMoveBook, title, currentShelf, authors, id, coverUrl}) {
+  authors = authors || [];
 
   return (
     <div className="book">
       <div className="book-top">
-        <div className="book-cover" style={{ width: 128, height: 192, backgroundImage: `url(${props.coverUrl})` }}></div>
+        <div className="book-cover" style={{ width: 128, height: 192, backgroundImage: `url(${coverUrl})` }}></div>
         <div className="book-shelf-changer">
-          <select defaultValue={props.currentShelf} onChange={ (event) => { onMoveBook({id: props.id}, event.target.value)}}>
+          <select defaultValue={currentShelf} onChange={ (event) => { onMoveBook({id: id}, event.target.value)}}>
             <option value="move" disabled>Move to...</option>
             <option value="currentlyReading">Currently Reading</option>
             <option value="wantToRead">Want to Read</option>
@@ -19,7 +18,7 @@ const Book =  function (props) {
           </select>
         </div>
       </div>
-      <div className="book-title">{props.title}</div>
+      <div className="book-title">{title}</div>
       <div className="book-authors">{authors}</div>
     </div>
   )
