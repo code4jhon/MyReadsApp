@@ -47,6 +47,9 @@ class App extends Component {
       <div className="App">
         <Route path="/" exact render={()=> (
           <div>
+            <div className="list-books-title">
+              <h1>Jon's Reads</h1>
+            </div>
             <BookShelf name="To Read" type="wantToRead" books={this.state.wantToRead} onMoveBook={this.onMoveBook}></BookShelf>
             <BookShelf name="Reading" type="currentlyReading" books={this.state.currentlyReading} onMoveBook={this.onMoveBook}></BookShelf>
             <BookShelf name="Read" type="read" books={this.state.read} onMoveBook={this.onMoveBook}></BookShelf>
