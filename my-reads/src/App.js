@@ -43,6 +43,9 @@ class App extends Component {
   }
 
   render() {
+    const state = this.state;
+    const booksInShelf = [...state.wantToRead, ...state.currentlyReading, ...state.read];
+
     return (
       <div className="App">
         <Route path="/" exact render={()=> (
@@ -50,9 +53,9 @@ class App extends Component {
             <div className="list-books-title">
               <h1>Jon's Reads</h1>
             </div>
-            <BookShelf name="To Read" type="wantToRead" books={this.state.wantToRead} onMoveBook={this.onMoveBook}></BookShelf>
-            <BookShelf name="Reading" type="currentlyReading" books={this.state.currentlyReading} onMoveBook={this.onMoveBook}></BookShelf>
-            <BookShelf name="Read" type="read" books={this.state.read} onMoveBook={this.onMoveBook}></BookShelf>
+            <BookShelf name="To Read" books={this.state.wantToRead} onMoveBook={this.onMoveBook}></BookShelf>
+            <BookShelf name="Reading" books={this.state.currentlyReading} onMoveBook={this.onMoveBook}></BookShelf>
+            <BookShelf name="Read" books={this.state.read} onMoveBook={this.onMoveBook}></BookShelf>
             <div className="open-search">
               <Link to="Search">Add a book</Link>
             </div>
@@ -60,7 +63,7 @@ class App extends Component {
         )}/>
 
         <Route path='/Search' render={()=> (
-          <SearchBooks onMoveBook={this.onMoveBook}></SearchBooks>
+          <SearchBooks onMoveBook={this.onMoveBook} booksInShelf={booksInShelf}></SearchBooks>
         )}/>
       </div>
     );

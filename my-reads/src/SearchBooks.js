@@ -11,9 +11,20 @@ class SearchBooks extends Component {
 
   onChange = (event) => {
     const me = this;
+    const booksInShelf = me.props.booksInShelf;
 
     BooksAPI.search(event.target.value).then(function (books) {
       books = Array.isArray(books) ? books : [];
+
+      books.forEach(function (book){ 
+        
+        const bookFound = booksInShelf.find(function(bookInShelf) {
+          return bookInShelf.id === book.id
+        })
+        
+        book.shelf = bookFound ? bookFound.shelf : 'none';
+      }); 
+
       me.setState({books});
     });
   } 
@@ -29,7 +40,7 @@ class SearchBooks extends Component {
           </div>
         </div>
         <div className="search-books-results">
-          <BookShelf name="Results" type="none" books={this.state.books} onMoveBook={this.props.onMoveBook}></BookShelf>
+          <BookShelf name="Results" books={this.state.books} onMoveBook={this.props.onMoveBook}></BookShelf>
         </div>
       </div>
     )
